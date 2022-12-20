@@ -1,5 +1,5 @@
 *{
-  font-family: 'Poppins', sans-serif;
+  font-family: sans-serif;
   padding: 0;
   margin: 0;
   flex-direction: row;
@@ -11,20 +11,26 @@
   display: flex;
   background-color: #f9f9f9;
   flex-direction: column;
-
+  border: rgb(63, 88, 227);
+  border-style: solid;
   align-items: center; 
   justify-content: center;
 }
 
 .card {
-  background-color: #fff;
+  background-color: #d7eaf1;
   border-radius: 0.5rem;
   flex-direction: row;
   /* width: 100%; */
   align-items: center; 
   justify-content: space-between;
   display: inline-flex;
+  border: rgb(11, 132, 218);
+  border-style: solid;
   /* flex-wrap: ; */
+  /* border: black;
+  border-style: solid; */
+  padding: 1.5rem;
 
 
 }
@@ -39,7 +45,9 @@
   padding: 0.9rem;
   color: #fff;
   font-size: 0.9rem;
-  border-radius: 0.3rem 0.3rem 0 0;
+  border-radius: 0.3rem;
+  border: black;
+  border-style: solid;
   
 }
 
@@ -55,8 +63,13 @@
   border-radius: 0.3rem;
   margin: 0.7rem;
   position: relative;
+  border: black;
+  border-style: solid;
 }
 
+button {
+  margin-top: 0.4rem;
+}
 .item-card1 {
   width: 8rem;
   background-color: #fff;
@@ -79,48 +92,60 @@
 }
 
 .drag-drop-list-container{
-  padding: 1.5rem 1.2rem;
-  display: flex;
+  padding: 1rem 1rem 1rem 1rem;
   align-items: center;
+  /* justify-content: center; */
+  display: flex;
+  
+
   flex-direction: row;
-  width: 500px;
-  height: 100px;
+  min-width: 200px;
+  min-height: 100px;
   border: #000;
+  border-style: solid;
+  border-radius: 0.3rem;
+  /* justify-content: space-between; */
 
 }
 
-.drag-drop-list-container1{
-  padding: 1.5rem 1.2rem;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-
-}
 
 .drag-drop-list-container-origin{
-  padding: 1.5rem 1.2rem;
+  padding: 1.5rem 1.2rem ;
   display: flex;
   /* height: 400px; */
   align-items: center;
   flex-direction: column;
   border: black;
   border-style: dashed;
-
+  /* width: 200px;
+  height: 400px; */
+  min-width: 200px;
+  min-height: 300px;
+  border-radius: 0.3rem;
 
 }
 
 .basic-node{
   display: center;
   align-items: center;
-  /* flex-direction: column; */
+  position: center;
+  height: auto;
+  width: 80px;
   border-radius: 30%;
+  align-content: center;
   background-color: yellow;
+  margin-left: auto;
+  margin-right: auto;
+  border: black;
+  border-style: solid;
 
 }
 
 .maves-flow-container{
   display: flex;
   flex-direction: column;
+  
+  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
 }
 .material-symbols-outlined {
   color: #ced6e0;
