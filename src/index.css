@@ -83,6 +83,9 @@
   display: flex;
   align-items: center;
   flex-direction: row;
+  width: 500px;
+  height: 100px;
+  border: #000;
 
 }
 
