@@ -52,9 +52,9 @@ function App() {
   const [row1List, setRow1List] = useState(row1);
   const [row2List, setRow2List] = useState(row2);
   const [row3List, setRow3List] = useState(row3);
-  const [screeningPopUpState, setScreeningPopUpState] = useState(false);
-  const [identityPopUpState, setIdentityPopUpState] = useState(false);
-  const [relationshipPopUpState, setRelationshipPopUpState] = useState(false);
+  // const [screeningPopUpState, setScreeningPopUpState] = useState(false);
+  // const [identityPopUpState, setIdentityPopUpState] = useState(false);
+  // const [relationshipPopUpState, setRelationshipPopUpState] = useState(false);
 
   // CONSTATNS FOR SCREENING PAGE
   const screening = [
@@ -84,8 +84,8 @@ function App() {
 
   const [relationshipSourceList, setRelationshipSourceList] = useState(relationship);
   const [relationshipRow1List, setRelationshipRow1List] = useState(relationshiprow1);
-  const [relationshipRow2List, setRelationshipnRow2List] = useState(relationshiprow2);
-  const [relationshipRow3List, setRelationshipnRow3List] = useState(relationshiprow3);
+  const [relationshipRow2List, setRelationshipRow2List] = useState(relationshiprow2);
+  const [relationshipRow3List, setRelationshipRow3List] = useState(relationshiprow3);
 
   const relationshipMatrix = [
     relationshipRow1List,
@@ -301,10 +301,10 @@ function App() {
       setRelationshipRow1List(relationshipRow1List);
     } else if (source.droppableId === 'row2') {
       item = relationshipRow2List.splice(source.index,1)[0];
-      setRelationshipnRow2List(relationshipRow2List);
+      setRelationshipRow2List(relationshipRow2List);
     } else if (source.droppableId === 'row3') {
       item = relationshipRow3List.splice(source.index,1)[0];
-      setRelationshipnRow3List(relationshipRow3List);
+      setRelationshipRow3List(relationshipRow3List);
     } else if (source.droppableId === 'source') {
       item = relationshipSourceList.splice(source.index,1)[0];
       setRelationshipSourceList(relationshipSourceList);
@@ -316,11 +316,11 @@ function App() {
       setRelationshipRow1List(relationshipRow1List);
     } else if (destination.droppableId === 'row2') {
       relationshipRow2List.splice(destination.index,0,item);
-      setRelationshipnRow2List(relationshipRow2List);
+      setRelationshipRow2List(relationshipRow2List);
     } 
     if (destination.droppableId === 'row3') {
       relationshipRow3List.splice(destination.index,0,item);
-      setRelationshipnRow3List(relationshipRow3List);
+      setRelationshipRow3List(relationshipRow3List);
     } 
     if (destination.droppableId === 'source') {
       relationshipSourceList.splice(destination.index,0,item);
@@ -334,7 +334,6 @@ function App() {
   }
 
   const executeFlow = (event, result) => {
-    
     axios
       .post(dummyBaseURL, JSON.stringify(result))
       .then((response) => {
@@ -343,6 +342,25 @@ function App() {
         // If response.data fail
         //setMessage("Mataveri Flow Execution Failure!");
       });
+      setIdentityRow1List([]);
+      setIdentityRow2List([]);
+      setIdentityRow3List([]);
+      setIdentitySourceList(identity);
+
+      setRelationshipRow1List([]);
+      setRelationshipRow2List([]);
+      setRelationshipRow3List([]);
+      setRelationshipSourceList(relationship);
+
+      setScreenRow1List([]);
+      setscreenRow2List([]);
+      setscreenSourceList(screening);
+
+      setRow1List([]);
+      setRow2List([]);
+      setRow3List([]);
+      setSourceList(original);
+      alert('Execution Submitted Successfully!');
   }
 
   original[0].metadata = screenMatrix;
@@ -358,7 +376,7 @@ function App() {
   return (
 
     <div className="container">
-      <div className="header"><center><h1>MATAVERI  FLOW  CONFIGURATION</h1></center></div>
+      <div id="top" className="header"><center><h1>MATAVERI  FLOW  CONFIGURATION</h1></center></div>
         <br/>
         <div className="card">
           
@@ -408,7 +426,7 @@ function App() {
                             <input
                               type="button"
                               value="Configure"
-                              onClick={screeningTogglePop}
+                              onClick={() => window.location.replace(`/#${item.id}`)}
                             />
                             {(isScreeningOpen && (item.label === "Screening")) ? <Popup
                               content={<>
@@ -466,7 +484,7 @@ function App() {
                               {item.label.charAt(0)}
                             </div>
                             <h3 className="label"><h3>{item.label}</h3></h3>
-                            <button>Configure</button>
+                            <button onClick={() => window.location.replace(`/#${item.id}`)}>Configure</button>
                           </div>
                         )}
                       </Draggable>
@@ -506,7 +524,7 @@ function App() {
                               {item.label.charAt(0)}
                             </div>
                             <h3 className="label"><h3>{item.label}</h3></h3>
-                            <button>Configure</button>
+                            <button onClick={() => window.location.replace(`/#${item.id}`)}>Configure</button>
                           </div>
                         )}
                       </Draggable>
@@ -546,7 +564,7 @@ function App() {
                               {item.label.charAt(0)}
                             </div>
                             <h3 className="label"><h3>{item.label}</h3></h3>
-                            <button>Configure</button>
+                            <button onClick={() => window.location.replace(`/#${item.id}`)}>Configure</button>
                           </div>
                         )}
                       </Draggable>
@@ -591,7 +609,7 @@ function App() {
       
         </div>
         <br/>
-        <Button variant="contained" onClick={event => executeFlow(event, result)}>CHECK</Button>
+        <Button variant="contained" onClick={event => executeFlow(event, result)}>EXECUTE FLOW</Button>
 
         <br/>
         <br/>
@@ -602,7 +620,7 @@ function App() {
         <br/>
         <br/> 
 
-        <div id="screening-flow" className="header"><center><h1>SCREENING  FLOW  CONFIGURATION</h1></center></div>
+        <div id="1" className="header"><center><h1>SCREENING  FLOW  CONFIGURATION</h1></center></div>
         <br/>
         <div className="card">
           <DragDropContext onDragEnd={onDragEndScreening} onDragOver={onDragOver}>
@@ -768,6 +786,9 @@ function App() {
         
       
         </div>
+
+        <br/>
+        <Button variant="contained" onClick={() => window.location.replace("/#top")}>GO TO TOP</Button>
          
         <br/>
         <br/>
@@ -782,7 +803,7 @@ function App() {
         <br/>
         <br/> 
       
-        <div id="identity-flow" className="header"><center><h1>IDENTITY  FLOW  CONFIGURATION</h1></center></div>
+        <div id="2" className="header"><center><h1>IDENTITY  FLOW  CONFIGURATION</h1></center></div>
         <br/>
         <div className="card">
           <DragDropContext onDragEnd={onDragEndIdentity} onDragOver={onDragOver}>
@@ -988,7 +1009,7 @@ function App() {
         
       
         </div>
-          
+        <Button variant="contained" onClick={() => window.location.replace("/#top")}>GO TO TOP</Button>
 
         <br/>
         <br/>
@@ -998,7 +1019,7 @@ function App() {
         
 
 
-        <div id="relationship-flow" className="header"><center><h1>RELATIONSHIP  FLOW  CONFIGURATION</h1></center></div>
+        <div id="3" className="header"><center><h1>RELATIONSHIP  FLOW  CONFIGURATION</h1></center></div>
         <br/>
         <div className="card">
           <DragDropContext onDragEnd={onDragEndRelationship} onDragOver={onDragOver}>
@@ -1200,7 +1221,7 @@ function App() {
           </DragDropContext>
         </div>
             
-        
+        <Button variant="contained" onClick={() => window.location.replace("/#top")}>GO TO TOP</Button>
 
 
         
