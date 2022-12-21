@@ -50,8 +50,20 @@
   border-radius: 0.3rem;
   border: black;
   border-style: solid;
+}
+
+.header-main {
+  background-color: #1e90ff;
+  padding: 2.5rem;
+  color: #fff;
+  font-size: 0.9rem;
+  border-radius: 0.8rem;
+  border: black;
+  border-style: solid;
+  border-width: 0.4rem;
   
 }
+
 
 .item-card {
   width: 8rem;
@@ -141,7 +153,7 @@ button {
   margin-right: auto;
   border: black;
   border-style: solid;
-
+  
 }
 
 .maves-flow-container{
@@ -152,6 +164,71 @@ button {
   margin-left: 5rem;
   padding: 1.5rem 1.5rem 1.5rem 1.5rem;
 }
+
+
+
+.CheckBox-container{
+  display: flex;
+  flex-direction: column;
+  border-style: dashed;	
+  border-radius: 0.3rem;	
+  margin-left: 1rem;
+  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+}
+
+.checkbox-wrapper{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+/* .checkbox-line{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+} */
+
+.checkbox-wrapper input[type="checkbox"] {
+  /* removing default appearance */
+  -webkit-appearance: none;
+  appearance: none;
+  /* creating a custom design */
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 0.15em;
+  margin-right: 0.5em;
+  border: 0.15em solid #007a7e;
+  outline: none;
+  cursor: pointer;
+}
+
+input.checked {
+  background-color: #007a7e;
+  position: relative;
+}
+
+
+input:checked::before {
+  content: "\2714";
+  font-size: 1.5em;
+  color: #fff;
+  position: absolute;
+  right: 1px;
+  top: -5px;
+}
+
+.checkbox-wrapper input[type="checkbox"]:disabled {
+  border-color: #c0c0c0;
+  background-color: #c0c0c0;
+}
+
+.checkbox-wrapper input[type="checkbox"]:disabled + span {
+  color: #c0c0c0;
+}
+
+.checkbox-wrapper input[type="checkbox"]:focus {
+  box-shadow: 0 0 20px #007a7e;
+}
+
 .material-symbols-outlined {
   color: #ced6e0;
   font-size: 1.3rem;

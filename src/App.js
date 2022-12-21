@@ -10,6 +10,11 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import Button from '@mui/material/Button';
+
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+
+
  
 const baseURL = "http://127.0.0.1:8000/execute";
 const dummyBaseURL = "https://webhook.site/cce4d976-a772-436d-9e1a-0e70f22d786f";
@@ -76,7 +81,7 @@ function App() {
   const relationship = [
     { id: "1", label: "LOA"},
     { id: "2", label: "Statute" },
-    { id: "3", label: "BAV" },
+    { id: "3", label: "BOV" },
   ];
   const relationshiprow1 = [];
   const relationshiprow2 = [];
@@ -107,6 +112,50 @@ function App() {
   const [identityRow1List, setIdentityRow1List] = useState(identityrow1);
   const [identityRow2List, setIdentityRow2List] = useState(identityrow2);
   const [identityRow3List, setIdentityRow3List] = useState(identityrow3);
+
+
+  // CONSTANTS FOR CHECKBOX
+  const [isPOCChecked, setIsPOCChecked] = useState(false);
+
+  const handleOnChangePOC = () => {
+    setIsPOCChecked(!isPOCChecked);
+  };
+  
+  const Checkbox = ({ label, checked, ...props }) => {
+    const defaultChecked = checked ? checked : false;
+    const [isChecked, setIsChecked] = useState(defaultChecked);
+  
+    return (
+      <div className="checkbox-wrapper">
+        <input
+          // id={id}
+          type="checkbox"
+          checked={isChecked}
+          className={isChecked ? "checked" : ""}
+          onChange={() => setIsChecked((prev) => !prev)}
+          {...props}
+        />
+        <h3>{label}</h3>
+        {/* &ensp;
+        <hr/>
+        {isChecked && 
+          {&ensp;
+          <h4>Enter </h4>
+        <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+              Number of entities
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item >Action</Dropdown.Item>
+              <Dropdown.Item >Another action</Dropdown.Item>
+              <Dropdown.Item >Something else</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+
+          }} */}
+      </div>
+    );
+  };
 
   const identityMatrix = [
     identityRow1List,
@@ -376,7 +425,36 @@ function App() {
   return (
 
     <div className="container">
-      <div id="top" className="header"><center><h1>MATAVERI  FLOW  CONFIGURATION</h1></center></div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>   
+        <br/>
+        <br/>
+        <br/>
+      <div className="header-main"><center><h1>WELCOME TO MATAVERI <br/> CLIENT ONBOARDING PORTAL</h1></center></div>
+        <br/>
+        <br/>
+        <br/>
+      <div className="CheckBox-container">
+        
+          <h2>Select the Entities to be verified - </h2>
+          <br/>
+          <Checkbox label="Point Of Contact" checked={false} />
+          <Checkbox label="Beneficial Owner" checked={false} />
+          <Checkbox label="Legal Representative" checked={false}/>
+          <Checkbox label="Secondary User" checked={false}/>
+      </div>  
+        
+
+        
+
+        <br/>
+        <br/>
+        <br/>
+          
+        
+      <div className="header"><center><h1>MATAVERI  FLOW  CONFIGURATION</h1></center></div>
         <br/>
         <div className="card">
           
