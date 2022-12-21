@@ -4,7 +4,15 @@ import {useEffect} from 'react';
 import Popup from "./PopUp";
 import Xarrow from "react-xarrows";	
 import ScreeningPage from "./ScreeningPage"
+import axios from 'axios';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+import Button from '@mui/material/Button';
  
+const baseURL = "http://127.0.0.1:8000/execute";
+const dummyBaseURL = "https://webhook.site/cce4d976-a772-436d-9e1a-0e70f22d786f";
 
 const sleep = ms => new Promise(
   resolve => setTimeout(resolve, ms)
@@ -18,7 +26,6 @@ function App() {
   //   // { id: "4", label: "Mike" },
   //   // { id: "5", label: "Dustin" },
   // ];
-
 
   useEffect(() => {
     async function fetchData() {
@@ -49,7 +56,6 @@ function App() {
   const [identityPopUpState, setIdentityPopUpState] = useState(false);
   const [relationshipPopUpState, setRelationshipPopUpState] = useState(false);
 
-
   // CONSTATNS FOR SCREENING PAGE
   const screening = [
     { id: "1", label: "PEP"},
@@ -60,6 +66,11 @@ function App() {
   const [screenSourceList, setscreenSourceList] = useState(screening);
   const [screenRow1List, setScreenRow1List] = useState(screenrow1);
   const [screenRow2List, setscreenRow2List] = useState(screenrow2);
+
+  const screenMatrix = [
+    screenRow1List,
+    screenRow2List
+  ]
 
   // CONSTATNS FOR SCREENING PAGE
   const relationship = [
@@ -76,6 +87,11 @@ function App() {
   const [relationshipRow2List, setRelationshipnRow2List] = useState(relationshiprow2);
   const [relationshipRow3List, setRelationshipnRow3List] = useState(relationshiprow3);
 
+  const relationshipMatrix = [
+    relationshipRow1List,
+    relationshipRow2List,
+    relationshipRow3List
+  ]
 
   // CONSTATNS FOR IDENTITY PAGE
   const identity = [
@@ -92,7 +108,11 @@ function App() {
   const [identityRow2List, setIdentityRow2List] = useState(identityrow2);
   const [identityRow3List, setIdentityRow3List] = useState(identityrow3);
 
-
+  const identityMatrix = [
+    identityRow1List,
+    identityRow2List,
+    identityRow3List
+  ]
   
 
 
@@ -255,9 +275,10 @@ function App() {
       identitySourceList.splice(destination.index,0,item);
       setIdentitySourceList(identitySourceList);
     }
-    console.log("Row1 - ", screenRow1List);
-    console.log("Row2 - ", screenRow2List);
-    console.log("Source - ", screenSourceList);
+    console.log("Row1 - ", identityRow1List);
+    console.log("Row2 - ", identityRow2List);
+    console.log("Row2 - ", identityRow3List);
+    console.log("Source - ", identitySourceList);
 
   }
 
@@ -312,6 +333,27 @@ function App() {
 
   }
 
+  const executeFlow = (event, result) => {
+    
+    axios
+      .post(dummyBaseURL, JSON.stringify(result))
+      .then((response) => {
+        // If response.data success
+        //setMessage("Executed Mataveri Flow Successfully!");
+        // If response.data fail
+        //setMessage("Mataveri Flow Execution Failure!");
+      });
+  }
+
+  original[0].metadata = screenMatrix;
+  original[1].metadata = identityMatrix;
+  original[2].metadata = relationshipMatrix;
+  
+  const result = [
+    row1List,
+    row2List,
+    row3List
+  ]
 
   return (
 
@@ -371,7 +413,10 @@ function App() {
                             {(isScreeningOpen && (item.label === "Screening")) ? <Popup
                               content={<>
                                 <b>Design your Popup</b>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                                  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                                  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                                 <button>Test button</button>
                               </>}
                               handleClose={screeningTogglePop} /> : null}
@@ -545,7 +590,8 @@ function App() {
         
       
         </div>
-        <button>CHECK</button>
+        <br/>
+        <Button variant="contained" onClick={event => executeFlow(event, result)}>CHECK</Button>
 
         <br/>
         <br/>
@@ -556,7 +602,7 @@ function App() {
         <br/>
         <br/> 
 
-        <div className="header"><center><h1>SCREENING  FLOW  CONFIGURATION</h1></center></div>
+        <div id="screening-flow" className="header"><center><h1>SCREENING  FLOW  CONFIGURATION</h1></center></div>
         <br/>
         <div className="card">
           <DragDropContext onDragEnd={onDragEndScreening} onDragOver={onDragOver}>
@@ -722,7 +768,7 @@ function App() {
         
       
         </div>
-        <button>CHECK</button>    
+         
         <br/>
         <br/>
         <br/>
@@ -736,7 +782,7 @@ function App() {
         <br/>
         <br/> 
       
-        <div className="header"><center><h1>IDENTITY  FLOW  CONFIGURATION</h1></center></div>
+        <div id="identity-flow" className="header"><center><h1>IDENTITY  FLOW  CONFIGURATION</h1></center></div>
         <br/>
         <div className="card">
           <DragDropContext onDragEnd={onDragEndIdentity} onDragOver={onDragOver}>
@@ -942,7 +988,7 @@ function App() {
         
       
         </div>
-        <button>CHECK</button>    
+          
 
         <br/>
         <br/>
@@ -952,7 +998,7 @@ function App() {
         
 
 
-        <div className="header"><center><h1>RELATIONSHIP  FLOW  CONFIGURATION</h1></center></div>
+        <div id="relationship-flow" className="header"><center><h1>RELATIONSHIP  FLOW  CONFIGURATION</h1></center></div>
         <br/>
         <div className="card">
           <DragDropContext onDragEnd={onDragEndRelationship} onDragOver={onDragOver}>
@@ -1153,7 +1199,7 @@ function App() {
             
           </DragDropContext>
         </div>
-        <button>CHECK</button>          
+            
         
 
 
